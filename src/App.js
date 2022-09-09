@@ -1,6 +1,5 @@
 import React from 'react'
 import LOGO from './assets/logo_medium.png'
-import GO from './assets/go.png'
 import WAVEFORM from './assets/waveform.png'
 import styled from 'styled-components'
 import {useState, createContext} from 'react'
@@ -8,7 +7,6 @@ import Colors from './Colors'
 import InputSection from './Components/InputSection'
 import postSongs from './Api/createPostSongs'
 import {DEFAULT_SETTINGS, ERROR_PROMPT} from './app_constants'
-import LOADING from './assets/loading.png'
 import SettingsButton from './Components/SettingsButton'
 import SettingsArea from './Components/SettingsArea'
 import MainBottomContainer from './Components/MainBottomContainer'
@@ -26,15 +24,13 @@ const App = () => {
     const [queryOptions, setQueryOptions] = useState(DEFAULT_SETTINGS)
     const [showAdvancedSettings, setShowAdvancedSettings] = useState(false)
 
-    console.log(queryOptions)
-
     const didInsertLinks = firstUrl && secondUrl
 
     const go = () => {
         if (didInsertLinks) {
             setMove(true)
             setReady(true)
-            postSongs([firstUrl, secondUrl])
+            postSongs([firstUrl, secondUrl], queryOptions)
             console.log('SENT HTTP REQUEST')
             if (error) {
                 setError(null)
