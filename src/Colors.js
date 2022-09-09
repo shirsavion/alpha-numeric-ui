@@ -6,4 +6,6 @@ export default {
     TRANSPARENT_GREY: '#97919799',
     LIGHT_PURPLE_NEW: '#EF1C4A40',
     PINK_NEW: '#FFC0CE',
+    CREAM: '#fffdd0',
+    RED: '#FFCCCB',
 }

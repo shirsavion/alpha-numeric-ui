@@ -5,21 +5,27 @@ import WAVEFORM from './assets/waveform.png'
 import styled from 'styled-components'
 import {useState} from 'react'
 import Colors from './Colors'
+import InputSection from './Components/InputSection'
 
 const App = () => {
+    const [value, setValue] = useState(0)
+
+    const increment = () => {
+        setValue((prev) => prev + 1)
+    }
+
     return (
         <Container>
-            <Logo src={LOGO} />
-            <InputSection>
-                <Input />
-                <Input />
-            </InputSection>
-            <WaveForm src={WAVEFORM} />
-            <BottomContainer>
-                <GoButton>
-                    <Go src={GO} />
-                </GoButton>
-            </BottomContainer>
+            <Page>
+                <Logo src={LOGO} />
+                <InputSection />
+                <WaveForm src={WAVEFORM} />
+                <BottomContainer>
+                    <GoButton onClick={increment}>
+                        <Go src={GO} />
+                    </GoButton>
+                </BottomContainer>
+            </Page>
         </Container>
     )
 }
@@ -27,41 +33,38 @@ const App = () => {
 export default App
 
 const Container = styled.div`
+    width: 100vw;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    background-color: #fffdd0;
+    display: flex;
+`
+const Page = styled.div`
     display: flex;
     flex-direction: column;
     background-color: ${Colors.BLUE};
-    width: 100vw;
+    width: 32vw;
+    border-radius: 100px;
     height: 100vh;
     align-items: center;
     justify-content: flex-start;
 `
 const Logo = styled.img`
     margin-top: 100px;
-    margin-bottom: 50;
     // background: ${Colors.LIGHT_PURPLE_NEW};
 `
 const Go = styled.img`
-    height: 150px;
-    width: 300px;
+    height: 200px;
 `
 const GoButton = styled.button`
     background: transparent;
+    height: 200px;
     border: 0px;
+    margin-top: -30px;
 `
 const BottomContainer = styled.div``
 const WaveForm = styled.img`
-    margin-top: 50px;
-    margin-bottom: 20px;
-`
-const InputSection = styled.div`
-    flex: column;
-    padding: 10px;
-`
-const Input = styled.input`
-    display: flex;
-    margin: 10px;
-    width: 400px;
-    height: 50px;
-    border-radius: 20px;
-    background: ${Colors.LIGHT_GREY};
+    height: 150px;
+    width: 38vw;
 `
