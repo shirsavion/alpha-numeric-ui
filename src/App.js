@@ -6,28 +6,27 @@ import styled from 'styled-components'
 import {useState, createContext} from 'react'
 import Colors from './Colors'
 import InputSection from './Components/InputSection'
-import {NUMBER_OF_URLS_NEEDED} from './app_constants'
+import postSongs from "./Api/createPostSongs";
+
 
 export const InputContext = createContext()
 
 const App = () => {
-    const [value, setValue] = useState(0)
+    // const [value, setValue] = useState(0)
     const [urls, setUrls] = useState([])
     const [error, setError] = useState(null)
 
-    console.log('URLS', urls)
-
-    const increment = () => {
-        setValue((prev) => prev + 1)
+    const clickToPost = (values) => {
+        postSongs(values)
     }
 
-    const go = () => {
-        if (urls?.length === NUMBER_OF_URLS_NEEDED) {
-            // TODO: post urls
-        } else {
-            // setError('')
-        }
-    }
+    // const go = () => {
+    //     if (urls?.length === NUMBER_OF_URLS_NEEDED) {
+    //         // TODO: post urls
+    //     } else {
+    //         // setError('')
+    //     }
+    // }
 
     return (
         <Container>
@@ -38,7 +37,9 @@ const App = () => {
                 </InputContext.Provider>
                 {error ?? <WaveForm src={WAVEFORM} />}
                 <BottomContainer>
-                    <GoButton onClick={increment}>
+                    <GoButton
+                        onClick={(e) => clickToPost("url1, url2")}
+                    >
                         <Go src={GO} />
                     </GoButton>
                 </BottomContainer>
