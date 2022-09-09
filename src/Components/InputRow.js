@@ -3,18 +3,19 @@ import {InputContext} from '../App'
 import styled from 'styled-components'
 import Colors from '../Colors'
 import LinkInput from './LinkInput'
-import YOUTUBE_ICON from '../assets/youtube_orange.png'
+import YOUTUBE_ICON from '../assets/youtube.png'
 import PLUS from '../assets/plus.png'
 import READY from '../assets/V.png'
 import {validateYoutubeLink} from '../utils/utils'
 
-const InputRow = () => {
+const InputRow = ({resetError}) => {
     const {urls, setUrls} = useContext(InputContext)
     const [link, setLink] = useState('')
     const [ready, setReady] = useState(false)
 
     const handleAddUrl = (e) => {
         e.preventDefault()
+        resetError()
         console.log('handling event: ', e)
         if (validateYoutubeLink(link) && urls?.length < 2) {
             setUrls((prev) => [...prev, link])
@@ -31,7 +32,7 @@ const InputRow = () => {
                     setLink={setLink}
                     submit={(e) => handleAddUrl(e)}
                 />
-                <SubmitButton>
+                <SubmitButton onClick={(e) => handleAddUrl(e)}>
                     <PlusIcon src={PLUS} />
                 </SubmitButton>
             </LinkRow>
@@ -53,7 +54,7 @@ export default InputRow
 const LinkRow = styled.div`
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-around;
     margin-top: 20px;
 `
 const IconYT = styled.img`
