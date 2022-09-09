@@ -2,11 +2,11 @@ import React from 'react'
 import styled from 'styled-components'
 import InputRow from './InputRow'
 
-const InputSection = () => {
+const InputSection = ({resetError}) => {
     return (
         <Container>
-            <InputRow />
-            <InputRow />
+            <InputRow resetError={resetError} />
+            <InputRow resetError={resetError} />
         </Container>
     )
 }
