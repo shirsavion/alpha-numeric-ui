@@ -7,6 +7,7 @@ import {useState, createContext} from 'react'
 import Colors from './Colors'
 import InputSection from './Components/InputSection'
 import postSongs from "./Api/createPostSongs";
+import pollUpdates from "./Api/pollUpdates";
 
 
 export const InputContext = createContext()
@@ -17,7 +18,8 @@ const App = () => {
     const [error, setError] = useState(null)
 
     const clickToPost = (values) => {
-        postSongs(values)
+        // postSongs(values)
+        pollUpdates(values)
     }
 
     // const go = () => {
@@ -38,7 +40,7 @@ const App = () => {
                 {error ?? <WaveForm src={WAVEFORM} />}
                 <BottomContainer>
                     <GoButton
-                        onClick={(e) => clickToPost("url1, url2")}
+                        onClick={(e) => clickToPost('id')}
                     >
                         <Go src={GO} />
                     </GoButton>
