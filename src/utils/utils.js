@@ -1,8 +1,10 @@
-const YOUTUBE_LINK_URL_PREFIX = 'https://youtu'
+const YOUTUBE_LINK_URL_CORE = 'youtu'
 
 export const validateYoutubeLink = (url) => {
-    if (!url || !url.startsWith(YOUTUBE_LINK_URL_PREFIX)) {
+    console.log('validating url: ', url)
+    if (!url || !url.includes(YOUTUBE_LINK_URL_CORE)) {
         return false
     }
+    console.log('added url: ', url)
     return true
 }

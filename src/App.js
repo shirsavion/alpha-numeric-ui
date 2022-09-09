@@ -51,7 +51,7 @@ export default App
 
 const Container = styled.div`
     width: 100vw;
-    height: 100vh;
+    height: 100%;
     justify-content: center;
     align-items: center;
     align-content: center;
