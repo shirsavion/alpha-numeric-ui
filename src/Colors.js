@@ -8,4 +8,6 @@ export default {
     PINK_NEW: '#FFC0CE',
     CREAM: '#fffdd0',
     RED: '#FFCCCB',
+    YELLOW: '#FFFBC8',
+    ORANGE: '#ff9d5c',
 }
