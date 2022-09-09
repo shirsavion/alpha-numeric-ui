@@ -17,4 +17,5 @@ const AdvancedButton = styled.button`
     margin-top: 10px;
     margin-bottom: -25px;
     color: ${Colors.YELLOW};
+    align-self: center;
 `

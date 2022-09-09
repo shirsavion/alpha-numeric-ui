@@ -2,7 +2,15 @@ import React, {useContext, useState} from 'react'
 import styled from 'styled-components'
 import Colors from '../Colors'
 import SettingInput from './SettingInput'
-import {DEFAULT_SETTINGS} from '../app_constants'
+import {
+    DEFAULT_SETTINGS,
+    SETTINGS_TITLE,
+    GENERATIONS,
+    POPULATION,
+    MUTATION,
+    CROSSOVER,
+    SELECTION,
+} from '../app_constants'
 import {InputContext} from '../App'
 import SettingsButton from './SettingsButton'
 
@@ -28,12 +36,35 @@ const SettingsArea = ({save}) => {
     }
     return (
         <Container>
-            <SettingInput setting={generations} setSetting={setGenerations} />
-            <SettingInput setting={population} setSetting={setPopulation} />
-            <SettingInput setting={selection} setSetting={setSelection} />
-            <SettingInput setting={mutation} setSetting={setMutation} />
-            <SettingInput setting={crossover} setSetting={setCrossover} />
-            <SettingsButton onClick={submit} text={SUBMIT}></SettingsButton>
+            <Title>{SETTINGS_TITLE}</Title>
+            <SettingInput
+                setting={generations}
+                setSetting={setGenerations}
+                label={GENERATIONS}
+            />
+            <SettingInput
+                setting={population}
+                setSetting={setPopulation}
+                label={POPULATION}
+            />
+            <SettingInput
+                setting={selection}
+                setSetting={setSelection}
+                label={SELECTION}
+            />
+            <SettingInput
+                setting={mutation}
+                setSetting={setMutation}
+                label={MUTATION}
+            />
+            <SettingInput
+                setting={crossover}
+                setSetting={setCrossover}
+                label={CROSSOVER}
+            />
+            <BottomContainer>
+                <SettingsButton onClick={submit} text={SUBMIT}></SettingsButton>
+            </BottomContainer>
         </Container>
     )
 }
@@ -43,13 +74,16 @@ export default SettingsArea
 const Container = styled.div`
     display: grid;
 `
-const AdvancedButton = styled.button`
-    width: 300px;
-    height: 40px;
-    border-radius: 10px;
-    border-width: 1px;
-    background: ${Colors.LIGHT_PURPLE_NEW};
-    margin-top: 10px;
-    margin-bottom: -25px;
-    color: ${Colors.YELLOW};
+const Title = styled.div`
+    color: ${Colors.TRANSPARENT_GREY};
+    font-size: 26px;
+    font-style: italic;
+    margin-bottom: 20px;
+    text-transform: capitalize;
+`
+const BottomContainer = styled.div`
+    width: 100%;
+    justify-content: center;
+    display: flex;
+    align-items: center;
 `

@@ -2,17 +2,18 @@ import React from 'react'
 import styled from 'styled-components'
 import Colors from '../Colors'
 
-const SettingInput = ({setting, setSetting}) => {
+const SettingInput = ({setting, setSetting, label}) => {
     return (
         <Form onSubmit={() => setSetting(setting)}>
-            <label>
+            <Row>
+                <Label>{label}</Label>
                 <Input
                     onChange={(e) => setSetting(e.target.value)}
                     type="number"
                     value={setting}
                     placeholder={setting}
                 />
-            </label>
+            </Row>
         </Form>
     )
 }
@@ -22,17 +23,28 @@ export default SettingInput
 const Input = styled.input`
     display: flex;
     margin: 10px;
-    width: 200px;
-    height: 50px;
+    width: 60px;
+    height: 40px;
     border-radius: 20px;
-    border-width: 8px;
+    border-width: 3px;
     background: ${Colors.LIGHT_GREY};
-    border-color: ${Colors.TRANSPARENT_GREY};
+    border-color: ${Colors.YELLOW};
     align-items: center;
     justify-content: center;
     text-align: center;
-    font-size: 24px;
-    color: ${Colors.BLUE};
-    align-self: flex-end;
+    color: black;
+    font-size: 18px;
 `
 const Form = styled.form``
+const Label = styled.label`
+    font-style: italic;
+    margin-right: 10px;
+`
+const Row = styled.span`
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    text-align: center;
+    font-size: 24px;
+    color: ${Colors.BLUE};
+`

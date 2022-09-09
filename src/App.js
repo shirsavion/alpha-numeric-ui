@@ -11,6 +11,7 @@ import {DEFAULT_SETTINGS, ERROR_PROMPT} from './app_constants'
 import LOADING from './assets/loading.png'
 import SettingsButton from './Components/SettingsButton'
 import SettingsArea from './Components/SettingsArea'
+import MainBottomContainer from './Components/MainBottomContainer'
 
 export const InputContext = createContext()
 
@@ -24,7 +25,9 @@ const App = () => {
     const [move, setMove] = useState(false)
     const [queryOptions, setQueryOptions] = useState(DEFAULT_SETTINGS)
     const [showAdvancedSettings, setShowAdvancedSettings] = useState(false)
+
     console.log(queryOptions)
+
     const didInsertLinks = firstUrl && secondUrl
 
     const go = () => {
@@ -46,6 +49,7 @@ const App = () => {
 
     const doShowSettings = () => setShowAdvancedSettings(true)
     const dontShowSetttings = () => setShowAdvancedSettings(false)
+
     return (
         <Container>
             <Page>
@@ -65,8 +69,7 @@ const App = () => {
                         <SettingsArea save={() => dontShowSetttings()} />
                     )}
                     {error && <ErrorArea>{error}</ErrorArea>}
-
-                    {!showAdvancedSettings && (
+                    {!showAdvancedSettings && !ready && (
                         <SettingsButton
                             onClick={doShowSettings}
                             text={ADVANCED_SETTINGS_TEXT}
@@ -75,17 +78,11 @@ const App = () => {
                 </InputContext.Provider>
 
                 <WaveForm src={WAVEFORM} move={move} />
-                {!ready ? (
-                    <BottomContainer>
-                        <GoButton onClick={go}>
-                            <Go src={GO} />
-                        </GoButton>
-                    </BottomContainer>
-                ) : (
-                    <BottomContainer>
-                        <Loading src={LOADING} />
-                    </BottomContainer>
-                )}
+                <MainBottomContainer
+                    onClick={go}
+                    isready={ready}
+                    showSettings={showAdvancedSettings}
+                />
             </Page>
         </Container>
     )
@@ -143,15 +140,5 @@ const WaveForm = styled.img`
 `
 const ErrorArea = styled.div`
     text-color: ${Colors.RED}
-    font-size: 24px;`
-
-const AdvancedButton = styled.button`
-    width: 300px;
-    height: 40px;
-    border-radius: 10px;
-    border-width: 1px;
-    background: ${Colors.LIGHT_PURPLE_NEW};
-    margin-top: 10px;
-    margin-bottom: -25px;
-    color: ${Colors.YELLOW};
+    font-size: 24px;
 `

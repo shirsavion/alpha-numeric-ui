@@ -7,6 +7,7 @@ import YOUTUBE_ICON from '../assets/youtube.png'
 import PLUS from '../assets/plus.png'
 import READY from '../assets/V.png'
 import {validateYoutubeLink} from '../utils/utils'
+import {YOUTUBE_BASE_URL} from '../app_constants'
 
 const InputRow = ({url, setUrl, resetError}) => {
     const [link, setLink] = useState('')
@@ -25,7 +26,9 @@ const InputRow = ({url, setUrl, resetError}) => {
     if (!ready)
         return (
             <LinkRow>
-                <IconYT src={YOUTUBE_ICON} />
+                <Link href={url ?? YOUTUBE_BASE_URL} target="_blank">
+                    <IconYT src={YOUTUBE_ICON}></IconYT>
+                </Link>
                 <LinkInput
                     link={link}
                     url={url}
@@ -87,3 +90,4 @@ const UrlReady = styled.div`
     font-size: 24px;
     color: ${Colors.BLUE};
 `
+const Link = styled.a``
