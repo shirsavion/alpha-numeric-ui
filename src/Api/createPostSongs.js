@@ -4,7 +4,7 @@ import React from 'react'
 
 
 export default function postSongs(urls) {
-    axios.post(apiRoutes.postSongs, urls || 'checkcheckcheck').then((response) => {
+    axios.post(apiRoutes.dummyPost, urls || 'checkcheckcheck').then((response) => {
         // debugger;
         console.log("[TAMIR] Im ok!" + response.data)
         return response.data
