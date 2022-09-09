@@ -1,12 +1,24 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import styled from 'styled-components'
 import InputRow from './InputRow'
+import {InputContext} from '../App'
 
 const InputSection = ({resetError}) => {
+    const {firstUrl, setFirstUrl, secondUrl, setSecondUrl} =
+        useContext(InputContext)
+
     return (
         <Container>
-            <InputRow resetError={resetError} />
-            <InputRow resetError={resetError} />
+            <InputRow
+                resetError={resetError}
+                url={firstUrl}
+                setUrl={setFirstUrl}
+            />
+            <InputRow
+                resetError={resetError}
+                url={secondUrl}
+                setUrl={setSecondUrl}
+            />
         </Container>
     )
 }

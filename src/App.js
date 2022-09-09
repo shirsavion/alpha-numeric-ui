@@ -7,22 +7,31 @@ import {useState, createContext} from 'react'
 import Colors from './Colors'
 import InputSection from './Components/InputSection'
 import postSongs from './Api/createPostSongs'
-import {ERROR_PROMPT, NUMBER_OF_URLS_NEEDED} from './app_constants'
+import {DEFAULT_SETTINGS, ERROR_PROMPT} from './app_constants'
 import LOADING from './assets/loading.png'
+import SettingsButton from './Components/SettingsButton'
+import SettingsArea from './Components/SettingsArea'
 
 export const InputContext = createContext()
 
+const ADVANCED_SETTINGS_TEXT = 'ADVANCED SETTINGS'
+
 const App = () => {
-    const [urls, setUrls] = useState([])
+    const [firstUrl, setFirstUrl] = useState(null)
+    const [secondUrl, setSecondUrl] = useState(null)
     const [error, setError] = useState(null)
     const [ready, setReady] = useState(false)
     const [move, setMove] = useState(false)
+    const [queryOptions, setQueryOptions] = useState(DEFAULT_SETTINGS)
+    const [showAdvancedSettings, setShowAdvancedSettings] = useState(false)
+    console.log(queryOptions)
+    const didInsertLinks = firstUrl && secondUrl
 
     const go = () => {
-        if (urls?.length === NUMBER_OF_URLS_NEEDED) {
+        if (didInsertLinks) {
             setMove(true)
             setReady(true)
-            postSongs(urls)
+            postSongs([firstUrl, secondUrl])
             console.log('SENT HTTP REQUEST')
             if (error) {
                 setError(null)
@@ -35,16 +44,36 @@ const App = () => {
         setError(null)
     }
 
-    console.log(urls)
-
+    const doShowSettings = () => setShowAdvancedSettings(true)
+    const dontShowSetttings = () => setShowAdvancedSettings(false)
     return (
         <Container>
             <Page>
                 <Logo src={LOGO} />
-                <InputContext.Provider value={{urls, setUrls}}>
-                    <InputSection resetError={resetError} />
+                <InputContext.Provider
+                    value={{
+                        firstUrl,
+                        setFirstUrl,
+                        secondUrl,
+                        setSecondUrl,
+                        queryOptions,
+                        setQueryOptions,
+                    }}>
+                    {!showAdvancedSettings ? (
+                        <InputSection resetError={resetError} />
+                    ) : (
+                        <SettingsArea save={() => dontShowSetttings()} />
+                    )}
+                    {error && <ErrorArea>{error}</ErrorArea>}
+
+                    {!showAdvancedSettings && (
+                        <SettingsButton
+                            onClick={doShowSettings}
+                            text={ADVANCED_SETTINGS_TEXT}
+                        />
+                    )}
                 </InputContext.Provider>
-                {error && <ErrorArea>{error}</ErrorArea>}
+
                 <WaveForm src={WAVEFORM} move={move} />
                 {!ready ? (
                     <BottomContainer>
@@ -115,3 +144,14 @@ const WaveForm = styled.img`
 const ErrorArea = styled.div`
     text-color: ${Colors.RED}
     font-size: 24px;`
+
+const AdvancedButton = styled.button`
+    width: 300px;
+    height: 40px;
+    border-radius: 10px;
+    border-width: 1px;
+    background: ${Colors.LIGHT_PURPLE_NEW};
+    margin-top: 10px;
+    margin-bottom: -25px;
+    color: ${Colors.YELLOW};
+`

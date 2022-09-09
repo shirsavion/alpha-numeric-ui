@@ -8,8 +8,7 @@ import PLUS from '../assets/plus.png'
 import READY from '../assets/V.png'
 import {validateYoutubeLink} from '../utils/utils'
 
-const InputRow = ({resetError}) => {
-    const {urls, setUrls} = useContext(InputContext)
+const InputRow = ({url, setUrl, resetError}) => {
     const [link, setLink] = useState('')
     const [ready, setReady] = useState(false)
 
@@ -17,8 +16,8 @@ const InputRow = ({resetError}) => {
         e.preventDefault()
         resetError()
         console.log('handling event: ', e)
-        if (validateYoutubeLink(link) && urls?.length < 2) {
-            setUrls((prev) => [...prev, link])
+        if (validateYoutubeLink(link)) {
+            setUrl(link)
             setReady(true)
         }
     }
@@ -29,6 +28,7 @@ const InputRow = ({resetError}) => {
                 <IconYT src={YOUTUBE_ICON} />
                 <LinkInput
                     link={link}
+                    url={url}
                     setLink={setLink}
                     submit={(e) => handleAddUrl(e)}
                 />

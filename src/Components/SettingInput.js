@@ -1,30 +1,28 @@
 import React from 'react'
 import styled from 'styled-components'
 import Colors from '../Colors'
-import {YOUTUBE_LINK_PLACEHOLDER} from '../app_constants'
 
-const LinkInput = ({link, setLink, submit, disabled, url}) => {
+const SettingInput = ({setting, setSetting}) => {
     return (
-        <Form onSubmit={submit}>
+        <Form onSubmit={() => setSetting(setting)}>
             <label>
                 <Input
-                    onChange={(e) => setLink(e.target.value)}
-                    type="url"
-                    value={url ?? link}
-                    placeholder={YOUTUBE_LINK_PLACEHOLDER}
-                    disabled={disabled}
+                    onChange={(e) => setSetting(e.target.value)}
+                    type="number"
+                    value={setting}
+                    placeholder={setting}
                 />
             </label>
         </Form>
     )
 }
 
-export default LinkInput
+export default SettingInput
 
 const Input = styled.input`
     display: flex;
     margin: 10px;
-    width: 400px;
+    width: 200px;
     height: 50px;
     border-radius: 20px;
     border-width: 8px;
@@ -32,7 +30,9 @@ const Input = styled.input`
     border-color: ${Colors.TRANSPARENT_GREY};
     align-items: center;
     justify-content: center;
+    text-align: center;
     font-size: 24px;
     color: ${Colors.BLUE};
+    align-self: flex-end;
 `
 const Form = styled.form``
