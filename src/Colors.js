@@ -10,4 +10,5 @@ export default {
     RED: '#FFCCCB',
     YELLOW: '#FFFBC8',
     ORANGE: '#ff9d5c',
+    BLUE_NEW_BACKGROUND: 'rgba(115, 153, 251, 0.5)',
 }

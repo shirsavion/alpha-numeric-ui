@@ -62,7 +62,7 @@ const Page = styled.div`
     display: flex;
     align-self: center;
     flex-direction: column;
-    background-color: ${Colors.GREEN};
+    background-color: ${Colors.BLUE_NEW_BACKGROUND};
     padding: 2px;
     width: 32%;
     border-radius: 100px;

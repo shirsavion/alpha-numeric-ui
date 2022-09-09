@@ -8,7 +8,7 @@ import {validateYoutubeLink} from '../utils/utils'
 
 const LinkInput = () => {
     const {urls, setUrls} = useContext(InputContext)
-    const [link, setLink] = useState(null)
+    const [link, setLink] = useState('')
 
     const addUrl = () => {
         console.log(link)
@@ -18,12 +18,14 @@ const LinkInput = () => {
     }
 
     return (
-        <Input
-            onsubmit={addUrl}
-            onChange={(e) => setLink(e.target.value)}
-            type="url"
-            placeholder={YOUTUBE_LINK_PLACEHOLDER}
-        />
+        <Form onsubmit={() => addUrl()}>
+            <Input
+                onChange={(e) => setLink(e.target.value)}
+                type="url"
+                value={link}
+                placeholder={YOUTUBE_LINK_PLACEHOLDER}
+            />
+        </Form>
     )
 }
 
@@ -43,3 +45,4 @@ const Input = styled.input`
     font-size: 24px;
     color: ${Colors.BLUE};
 `
+const Form = styled.form``
