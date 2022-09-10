@@ -10,10 +10,9 @@ import {DEFAULT_SETTINGS, ERROR_PROMPT} from './app_constants'
 import SettingsButton from './Components/SettingsButton'
 import SettingsArea from './Components/SettingsArea'
 import MainBottomContainer from './Components/MainBottomContainer'
+import MainUpperContainer from './Components/MainUpperContainer'
 
 export const InputContext = createContext()
-
-const ADVANCED_SETTINGS_TEXT = 'ADVANCED SETTINGS'
 
 const App = () => {
     const [firstUrl, setFirstUrl] = useState(null)
@@ -58,7 +57,15 @@ const App = () => {
                         queryOptions,
                         setQueryOptions,
                     }}>
-                    {!showAdvancedSettings ? (
+                    <MainUpperContainer
+                        error={error}
+                        resetError={resetError}
+                        isready={ready}
+                        isShowSettings={showAdvancedSettings}
+                        doShowSettings={doShowSettings}
+                        dontShowSettings={dontShowSettings}
+                    />
+                    {/* {!showAdvancedSettings ? (
                         <InputSection resetError={resetError} />
                     ) : (
                         <SettingsArea save={() => dontShowSettings()} />
@@ -69,7 +76,7 @@ const App = () => {
                             onClick={doShowSettings}
                             text={ADVANCED_SETTINGS_TEXT}
                         />
-                    )}
+                    )} */}
                 </InputContext.Provider>
 
                 <WaveForm src={WAVEFORM} move={move} />
@@ -109,17 +116,7 @@ const Logo = styled.img`
     margin-top: 50px;
     // background: ${Colors.LIGHT_PURPLE_NEW};
 `
-const Go = styled.img`
-    height: 200px;
-`
-const Loading = styled(Go)``
-const GoButton = styled.button`
-    background: transparent;
-    height: 200px;
-    border: 0px;
-    margin-top: -30px;
-`
-const BottomContainer = styled.div``
+
 const WaveForm = styled.img`
     height: 140px;
     width: 38vw;

@@ -16,3 +16,5 @@ export const POPULATION = 'population size'
 export const MUTATION = 'Mutation Probability'
 export const CROSSOVER = 'Crossover Probability'
 export const SELECTION = 'Selection Probability'
+
+export const ADVANCED_SETTINGS_TEXT = 'ADVANCED SETTINGS'
