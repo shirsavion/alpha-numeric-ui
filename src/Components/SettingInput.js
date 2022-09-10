@@ -4,7 +4,7 @@ import Colors from '../Colors'
 
 const SettingInput = ({setting, setSetting, label}) => {
     return (
-        <Form onSubmit={() => setSetting(setting)}>
+        <Form onSubmit={(e) => e.preventDefault()}>
             <Row>
                 <Label>{label}</Label>
                 <Input
