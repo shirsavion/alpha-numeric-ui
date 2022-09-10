@@ -14,11 +14,6 @@ const MainUpperContainer = ({
     doShowSettings,
     dontShowSettings,
 }) => {
-    console.log('isShowSettings', isShowSettings)
-    console.log('doShowSettings', doShowSettings)
-    console.log('dontShowSettings', dontShowSettings)
-    console.log('isready', isready)
-
     if (isready) {
         return (
             <Container>

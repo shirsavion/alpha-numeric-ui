@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import Colors from '../Colors'
 
-const SettingsButton = ({showSettings, text, onClick}) => {
+const SettingsButton = ({text, onClick}) => {
     return <AdvancedButton onClick={onClick}>{text}</AdvancedButton>
 }
 
@@ -14,8 +14,8 @@ const AdvancedButton = styled.button`
     border-radius: 10px;
     border-width: 1px;
     background: ${Colors.LIGHT_PURPLE_NEW};
-    margin-top: 10px;
-    margin-bottom: -25px;
+    margin-top: 20px;
+    margin-bottom: -20px;
     color: ${Colors.YELLOW};
     align-self: center;
 `

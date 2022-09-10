@@ -4,13 +4,15 @@ import WAVEFORM from './assets/waveform.png'
 import styled from 'styled-components'
 import {useState, createContext} from 'react'
 import Colors from './Colors'
-import InputSection from './Components/InputSection'
 import postSongs from './Api/createPostSongs'
-import {DEFAULT_SETTINGS, ERROR_PROMPT} from './app_constants'
-import SettingsButton from './Components/SettingsButton'
-import SettingsArea from './Components/SettingsArea'
 import MainBottomContainer from './Components/MainBottomContainer'
 import MainUpperContainer from './Components/MainUpperContainer'
+import {
+    DEFAULT_SETTINGS,
+    ERROR_PROMPT,
+    PROMPT_BY_REQUEST_STATUS,
+    lorem,
+} from './app_constants'
 
 export const InputContext = createContext()
 
@@ -22,14 +24,26 @@ const App = () => {
     const [move, setMove] = useState(false)
     const [queryOptions, setQueryOptions] = useState(DEFAULT_SETTINGS)
     const [showAdvancedSettings, setShowAdvancedSettings] = useState(false)
+    const [trackingId, setTrackingId] = useState(null)
+
+    const [requestStatus, setRequestStatus] = useState(
+        PROMPT_BY_REQUEST_STATUS.PRE,
+    )
 
     const didInsertLinks = firstUrl && secondUrl
+
+    const audioPrepared = requestStatus === PROMPT_BY_REQUEST_STATUS.DONE
 
     const go = () => {
         if (didInsertLinks) {
             setMove(true)
             setReady(true)
-            postSongs([firstUrl, secondUrl], queryOptions)
+            const request = postSongs([firstUrl, secondUrl], queryOptions)
+            if (request) {
+                const {requestId} = request
+                setTrackingId(requestId)
+                setRequestStatus(PROMPT_BY_REQUEST_STATUS.pre)
+            }
             if (error) {
                 resetError()
             }
@@ -37,6 +51,7 @@ const App = () => {
             setError(ERROR_PROMPT)
         }
     }
+
     const resetError = () => {
         setError(null)
     }
@@ -46,6 +61,9 @@ const App = () => {
 
     return (
         <Container>
+            {showAdvancedSettings && (
+                <DescriptionText> {lorem}</DescriptionText>
+            )}
             <Page>
                 <Logo src={LOGO} />
                 <InputContext.Provider
@@ -56,6 +74,9 @@ const App = () => {
                         setSecondUrl,
                         queryOptions,
                         setQueryOptions,
+                        requestStatus,
+                        setRequestStatus,
+                        trackingId,
                     }}>
                     <MainUpperContainer
                         error={error}
@@ -65,21 +86,8 @@ const App = () => {
                         doShowSettings={doShowSettings}
                         dontShowSettings={dontShowSettings}
                     />
-                    {/* {!showAdvancedSettings ? (
-                        <InputSection resetError={resetError} />
-                    ) : (
-                        <SettingsArea save={() => dontShowSettings()} />
-                    )}
-                    {error && <ErrorArea>{error}</ErrorArea>}
-                    {!showAdvancedSettings && !ready && (
-                        <SettingsButton
-                            onClick={doShowSettings}
-                            text={ADVANCED_SETTINGS_TEXT}
-                        />
-                    )} */}
                 </InputContext.Provider>
-
-                <WaveForm src={WAVEFORM} move={move} />
+                <WaveForm src={WAVEFORM} move={move} ready={audioPrepared} />
                 <MainBottomContainer
                     onClick={go}
                     isready={ready}
@@ -95,7 +103,7 @@ export default App
 const Container = styled.div`
     width: 100vw;
     height: 100%;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
     align-content: center;
     background-color: #fffdd0;
@@ -129,8 +137,13 @@ const WaveForm = styled.img`
         `
             transform: rotate(7200deg);
         `};
+    ${(props) =>
+        props.ready &&
+        `
+            transform: scale(2, 0.5);
+        `};
 `
-const ErrorArea = styled.div`
-    text-color: ${Colors.RED}
-    font-size: 24px;
+const DescriptionText = styled.div`
+    justify-content: flex-start;
+    max-width: 30%;
 `

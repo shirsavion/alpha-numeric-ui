@@ -13,6 +13,7 @@ const postSongs = (urls, queryOptions) => {
         })
         .catch((e) => {
             console.error(e?.message || e)
+            return false
         })
 }
 

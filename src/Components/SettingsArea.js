@@ -18,11 +18,11 @@ const SUBMIT = 'SAVE ADVANCED SETTINGS'
 
 const SettingsArea = ({save}) => {
     const {setQueryOptions} = useContext(InputContext)
-    const [generations, setGenerations] = useState(DEFAULT_SETTINGS.generations)
-    const [population, setPopulation] = useState(DEFAULT_SETTINGS.population)
-    const [selection, setSelection] = useState(DEFAULT_SETTINGS.selection)
-    const [mutation, setMutation] = useState(DEFAULT_SETTINGS.mutation)
-    const [crossover, setCrossover] = useState(DEFAULT_SETTINGS.crossover)
+    const [generations, setGenerations] = useState(DEFAULT_SETTINGS.GENERATIONS)
+    const [population, setPopulation] = useState(DEFAULT_SETTINGS.POPULATION)
+    const [selection, setSelection] = useState(DEFAULT_SETTINGS.SELECTION)
+    const [mutation, setMutation] = useState(DEFAULT_SETTINGS.MUTATION)
+    const [crossover, setCrossover] = useState(DEFAULT_SETTINGS.CROSSOVER)
 
     const submit = () => {
         save()
