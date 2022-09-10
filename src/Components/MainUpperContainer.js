@@ -1,9 +1,9 @@
 import React from 'react'
 import styled from 'styled-components'
+import {ADVANCED_SETTINGS_TEXT} from '../app_constants'
 import InputSection from './InputSection'
 import SettingsArea from './SettingsArea'
 import SettingsButton from './SettingsButton'
-import {ADVANCED_SETTINGS_TEXT} from '../app_constants'
 import PlayArea from './PlayArea'
 
 const MainUpperContainer = ({
@@ -14,6 +14,10 @@ const MainUpperContainer = ({
     doShowSettings,
     dontShowSettings,
 }) => {
+    const ErrorRow = () => {
+        return error ? <ErrorArea>{error}</ErrorArea> : null
+    }
+
     if (isready) {
         return (
             <Container>
@@ -21,22 +25,24 @@ const MainUpperContainer = ({
             </Container>
         )
     }
+    if (isShowSettings) {
+        return (
+            <Container>
+                <SettingsArea save={() => dontShowSettings()} />
+                <ErrorRow />
+            </Container>
+        )
+    }
     return (
         <Container>
-            {!isShowSettings ? (
-                <InputSection resetError={resetError} />
-            ) : (
-                <SettingsArea save={() => dontShowSettings()} />
-            )}
-            {error && <ErrorArea>{error}</ErrorArea>}
-            {!isShowSettings && (
-                <InnerContainer>
-                    <SettingsButton
-                        onClick={doShowSettings}
-                        text={ADVANCED_SETTINGS_TEXT}
-                    />
-                </InnerContainer>
-            )}
+            <InputSection resetError={resetError} />
+            <ErrorRow />
+            <InnerContainer>
+                <SettingsButton
+                    onClick={doShowSettings}
+                    text={ADVANCED_SETTINGS_TEXT}
+                />
+            </InnerContainer>
         </Container>
     )
 }
@@ -50,4 +56,10 @@ const Container = styled.div`
 `
 const InnerContainer = styled(Container)`
     display: flex;
+`
+const ErrorArea = styled.div`
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    color: black;
 `

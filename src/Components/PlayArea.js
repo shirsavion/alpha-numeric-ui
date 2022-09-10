@@ -4,38 +4,33 @@ import PlayButton from './PlayArea/PlayButton'
 import PingButton from './PlayArea/PingButton'
 import {InputContext} from '../App'
 import {PROMPT_BY_REQUEST_STATUS} from '../app_constants'
-import axios from "axios";
-import {apiRoutes} from "../Api/routes";
+import {IMAGE_BY_STATUS} from '../utils/utils'
+import axios from 'axios'
+import {apiRoutes} from '../Api/routes'
 
 const PlayArea = () => {
     const {trackingId, setRequestStatus, requestStatus} =
         useContext(InputContext)
-    console.log(trackingId)
-    const [audioResult, setAudioResult] = useState(null)
-    const [error, setError] = useState(null)
 
-    const canPlay = requestStatus === PROMPT_BY_REQUEST_STATUS.DONE && audioResult
+    const [audioResult, setAudioResult] = useState(null)
+
+    const imageToShow = IMAGE_BY_STATUS[requestStatus]
+    const requestHeader = apiRoutes.pollUpdates + trackingId
+    const canPlay =
+        requestStatus === PROMPT_BY_REQUEST_STATUS.DONE && audioResult
 
     const pollUpdates = () => {
-        axios
-            .get(apiRoutes.pollUpdates + trackingId)
-            .then((response) => {
-                    console.log("got response from get", response.data)
-                    const status = response?.data?.status
-                    if (response.data?.isReady && response.data?.file64) {
-                        const song = response.data?.file64
-                        const audio = new Audio('data:audio/wav;base64,' + song)
-                        setAudioResult(audio)
-                    }
-                    setRequestStatus(status)
-                    if (status === PROMPT_BY_REQUEST_STATUS.ERROR) {
-                        setError(status)
-                    }
-            })
-    }
-
-    const checkRequestStatus = () => {
-        pollUpdates()
+        axios.get(requestHeader).then((response) => {
+            const status = response?.data?.status
+            if (status) {
+                setRequestStatus(status)
+            }
+            if (response.data?.isReady && response.data?.file64) {
+                const song = response.data?.file64
+                const audio = new Audio('data:audio/wav;base64,' + song)
+                setAudioResult(audio)
+            }
+        })
     }
 
     const playResult = () => audioResult?.play()
@@ -43,10 +38,13 @@ const PlayArea = () => {
     return (
         <Container>
             <InnerContainer>
-                {!canPlay ? <PingButton onclick={checkRequestStatus}/> : null}
-                {canPlay ? <PlayButton onclick={playResult}/> : null}
+                {!canPlay ? (
+                    <PingButton onclick={pollUpdates} />
+                ) : (
+                    <PlayButton onclick={playResult} />
+                )}
             </InnerContainer>
-            <StatusUpdate>{error ?? requestStatus}</StatusUpdate>
+            <StatusUpdate src={imageToShow} />
         </Container>
     )
 }
@@ -63,10 +61,7 @@ const InnerContainer = styled.div`
     justify-content: center;
     margin-bottom: 10px;
 `
-const StatusUpdate = styled.div`
-    font-size: 28px;
-    color: black;
-    align-content: center;
-    text-align: center;
-    font-style: italic;
+const StatusUpdate = styled.img`
+    height: 100px;
+    margin-bottom: -20px;
 `

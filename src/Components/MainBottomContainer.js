@@ -3,15 +3,20 @@ import styled from 'styled-components'
 import GO from '../assets/go.png'
 import LOADING from '../assets/loading.png'
 
-const MainBottomContainer = ({onClick, isready, showSettings}) => {
+const MainBottomContainer = ({
+    onClick,
+    isready,
+    isShowSettings,
+    audioPrepared,
+}) => {
     if (isready) {
         return (
             <BottomContainer>
-                <Loading src={LOADING} />
+                {!audioPrepared && <Loading src={LOADING} />}
             </BottomContainer>
         )
     }
-    if (!showSettings) {
+    if (!isShowSettings) {
         return (
             <BottomContainer>
                 <GoButton onClick={onClick}>
@@ -25,7 +30,9 @@ const MainBottomContainer = ({onClick, isready, showSettings}) => {
 
 export default MainBottomContainer
 
-const BottomContainer = styled.div``
+const BottomContainer = styled.div`
+    height: 200px;
+`
 
 const Go = styled.img`
     height: 200px;

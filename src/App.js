@@ -1,13 +1,18 @@
 import React, {createContext, useState} from 'react'
-import LOGO from './assets/logo_medium.png'
-import WAVEFORM from './assets/waveform.png'
 import styled from 'styled-components'
 import Colors from './Colors'
 import MainBottomContainer from './Components/MainBottomContainer'
 import MainUpperContainer from './Components/MainUpperContainer'
-import {DEFAULT_SETTINGS, ERROR_PROMPT, lorem, PROMPT_BY_REQUEST_STATUS,} from './app_constants'
-import axios from "axios";
-import {apiRoutes} from "./Api/routes";
+import axios from 'axios'
+import {apiRoutes} from './Api/routes'
+import LOGO from './assets/logo_medium.png'
+import WAVEFORM from './assets/waveform.png'
+import {
+    DEFAULT_SETTINGS,
+    ERROR_PROMPT,
+    DESCRIPTION,
+    PROMPT_BY_REQUEST_STATUS,
+} from './app_constants'
 
 export const InputContext = createContext()
 
@@ -25,7 +30,6 @@ const App = () => {
     )
 
     const didInsertLinks = firstUrl && secondUrl
-
     const audioPrepared = requestStatus === PROMPT_BY_REQUEST_STATUS.DONE
 
     const postSongs = () => {
@@ -35,12 +39,11 @@ const App = () => {
                 advanced: queryOptions,
             })
             .then((response) => {
-                console.log("got response from post", response.data)
+                console.log('got response from post', response.data)
                 const {id: requestId, msg: status} = response?.data
                 setTrackingId(requestId)
             })
     }
-    console.log("requestStatus && trackingId", requestStatus, trackingId)
 
     const go = () => {
         if (didInsertLinks) {
@@ -54,18 +57,23 @@ const App = () => {
             setError(ERROR_PROMPT)
         }
     }
-
     const resetError = () => {
         setError(null)
     }
 
-    const doShowSettings = () => setShowAdvancedSettings(true)
-    const dontShowSettings = () => setShowAdvancedSettings(false)
+    const doShowSettings = () => {
+        resetError()
+        setShowAdvancedSettings(true)
+    }
+    const dontShowSettings = () => {
+        resetError()
+        setShowAdvancedSettings(false)
+    }
 
     return (
         <Container>
             {showAdvancedSettings && (
-                <DescriptionText> {lorem}</DescriptionText>
+                <DescriptionText> {DESCRIPTION}</DescriptionText>
             )}
             <Page>
                 <Logo src={LOGO} />
@@ -94,7 +102,8 @@ const App = () => {
                 <MainBottomContainer
                     onClick={go}
                     isready={ready}
-                    showSettings={showAdvancedSettings}
+                    audioPrepared={audioPrepared}
+                    isShowSettings={showAdvancedSettings}
                 />
             </Page>
         </Container>

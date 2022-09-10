@@ -1,7 +1,7 @@
 import React, {useContext} from 'react'
+import {InputContext} from '../App'
 import styled from 'styled-components'
 import InputRow from './InputRow'
-import {InputContext} from '../App'
 
 const InputSection = ({resetError}) => {
     const {firstUrl, setFirstUrl, secondUrl, setSecondUrl} =

@@ -3,18 +3,16 @@ import styled from 'styled-components'
 import Colors from '../Colors'
 import {YOUTUBE_LINK_PLACEHOLDER} from '../app_constants'
 
-const LinkInput = ({link, setLink, submit, disabled, url}) => {
+const LinkInput = ({link, setLink, submit, disabled, savedUrl}) => {
     return (
         <Form onSubmit={submit}>
-            <label>
-                <Input
-                    onChange={(e) => setLink(e.target.value)}
-                    type="url"
-                    value={url ?? link}
-                    placeholder={YOUTUBE_LINK_PLACEHOLDER}
-                    disabled={disabled}
-                />
-            </label>
+            <Input
+                onChange={(e) => setLink(e.target.value)}
+                type="url"
+                value={savedUrl ?? link}
+                placeholder={YOUTUBE_LINK_PLACEHOLDER}
+                disabled={disabled}
+            />
         </Form>
     )
 }

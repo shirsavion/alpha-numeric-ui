@@ -2,6 +2,8 @@ import React, {useContext, useState} from 'react'
 import styled from 'styled-components'
 import Colors from '../Colors'
 import SettingInput from './SettingInput'
+import {InputContext} from '../App'
+import SettingsButton from './SettingsButton'
 import {
     DEFAULT_SETTINGS,
     SETTINGS_TITLE,
@@ -10,11 +12,8 @@ import {
     MUTATION,
     CROSSOVER,
     SELECTION,
+    SAVE_SETTINGS,
 } from '../app_constants'
-import {InputContext} from '../App'
-import SettingsButton from './SettingsButton'
-
-const SUBMIT = 'SAVE ADVANCED SETTINGS'
 
 const SettingsArea = ({save}) => {
     const {setQueryOptions} = useContext(InputContext)
@@ -63,7 +62,9 @@ const SettingsArea = ({save}) => {
                 label={CROSSOVER}
             />
             <BottomContainer>
-                <SettingsButton onClick={submit} text={SUBMIT}></SettingsButton>
+                <SettingsButton
+                    onClick={submit}
+                    text={SAVE_SETTINGS}></SettingsButton>
             </BottomContainer>
         </Container>
     )

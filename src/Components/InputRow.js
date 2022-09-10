@@ -1,13 +1,11 @@
-import React, {useContext, useState} from 'react'
-import {InputContext} from '../App'
+import React, {useState} from 'react'
 import styled from 'styled-components'
-import Colors from '../Colors'
-import LinkInput from './LinkInput'
+import {YOUTUBE_BASE_URL} from '../app_constants'
 import YOUTUBE_ICON from '../assets/youtube.png'
 import PLUS from '../assets/plus.png'
 import READY from '../assets/V.png'
+import LinkInput from './LinkInput'
 import {validateYoutubeLink} from '../utils/utils'
-import {YOUTUBE_BASE_URL} from '../app_constants'
 
 const InputRow = ({url, setUrl, resetError}) => {
     const [link, setLink] = useState('')
@@ -16,7 +14,6 @@ const InputRow = ({url, setUrl, resetError}) => {
     const handleAddUrl = (e) => {
         e.preventDefault()
         resetError()
-        console.log('handling event: ', e)
         if (validateYoutubeLink(link)) {
             setUrl(link)
             setReady(true)
@@ -26,27 +23,26 @@ const InputRow = ({url, setUrl, resetError}) => {
     if (!ready)
         return (
             <LinkRow>
-                <Link href={YOUTUBE_BASE_URL} target="_blank">
+                <YouTubeLink href={YOUTUBE_BASE_URL} target="_blank">
                     <IconYT src={YOUTUBE_ICON}></IconYT>
-                </Link>
+                </YouTubeLink>
                 <LinkInput
                     link={link}
-                    url={url}
+                    savedUrl={url}
                     setLink={setLink}
-                    submit={(e) => handleAddUrl(e)}
+                    submit={handleAddUrl}
                 />
-                <SubmitButton onClick={(e) => handleAddUrl(e)}>
+                <SubmitButton onClick={handleAddUrl}>
                     <PlusIcon src={PLUS} />
                 </SubmitButton>
             </LinkRow>
         )
     return (
         <LinkRow>
-            <Link href={url ?? YOUTUBE_BASE_URL} target="_blank">
+            <YouTubeLink href={url ?? YOUTUBE_BASE_URL} target="_blank">
                 <IconYT src={YOUTUBE_ICON} />
-            </Link>
+            </YouTubeLink>
             <LinkInput link={link} disabled />
-            {/* <UrlReady /> */}
             <SubmitButton>
                 <ReadyIcon src={READY} />
             </SubmitButton>
@@ -78,18 +74,4 @@ const SubmitButton = styled.button`
     justify-content: center;
     display: flex;
 `
-const UrlReady = styled.div`
-    display: flex;
-    margin: 10px;
-    width: 400px;
-    height: 50px;
-    border-radius: 20px;
-    border-width: 8px;
-    background: ${Colors.LIGHT_GREY};
-    border-color: ${Colors.TRANSPARENT_GREY};
-    align-items: center;
-    justify-content: center;
-    font-size: 24px;
-    color: ${Colors.BLUE};
-`
-const Link = styled.a``
+const YouTubeLink = styled.a``
