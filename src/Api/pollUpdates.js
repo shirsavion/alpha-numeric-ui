@@ -4,10 +4,12 @@ import React from 'react'
 
 
 export default function pollUpdates(songId) {
-    axios.get(apiRoutes.pollUpdates).then((response) => { //Add songId to query
+    axios.get(apiRoutes.pollUpdates + songId ).then((response) => { //Add songId to query
         if (response) {
             if (response.data?.isReady) {
-                (response.data.file) // TODO: add logic to fix song
+                const song = response.data?.file64
+                var snd = new Audio("data:audio/wav;base64," + song);
+                snd.play();
             }
             return (response.data.state)
         }
