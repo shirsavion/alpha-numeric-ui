@@ -1,7 +1,8 @@
-import {apiRoutes} from '../routes'
+import {apiRoutes} from './routes'
 import axios from 'axios'
+import postSongs from "./createPostSongs";
 
-export default pollUpdates = (requestId) => {
+const pollUpdates = (requestId) => {
     axios
         .get(apiRoutes.pollUpdates + requestId)
         .then((response) => {
@@ -17,6 +18,7 @@ export default pollUpdates = (requestId) => {
             }
         })
         .catch((e) => {
-            console.error('[TAMIR] Im a error!' + e?.message || e)
+            console.error(e?.message || e)
         })
 }
+export default pollUpdates

@@ -31,9 +31,9 @@ const App = () => {
             setMove(true)
             setReady(true)
             postSongs([firstUrl, secondUrl], queryOptions)
-            console.log('SENT HTTP REQUEST')
+            console.log('SENT HTTP REQUEST') // todo: remove
             if (error) {
-                setError(null)
+                resetError()
             }
         } else {
             setError(ERROR_PROMPT)
@@ -44,7 +44,7 @@ const App = () => {
     }
 
     const doShowSettings = () => setShowAdvancedSettings(true)
-    const dontShowSetttings = () => setShowAdvancedSettings(false)
+    const dontShowSettings = () => setShowAdvancedSettings(false)
 
     return (
         <Container>
@@ -62,7 +62,7 @@ const App = () => {
                     {!showAdvancedSettings ? (
                         <InputSection resetError={resetError} />
                     ) : (
-                        <SettingsArea save={() => dontShowSetttings()} />
+                        <SettingsArea save={() => dontShowSettings()} />
                     )}
                     {error && <ErrorArea>{error}</ErrorArea>}
                     {!showAdvancedSettings && !ready && (
