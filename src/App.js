@@ -31,7 +31,6 @@ const App = () => {
             setMove(true)
             setReady(true)
             postSongs([firstUrl, secondUrl], queryOptions)
-            console.log('SENT HTTP REQUEST') // todo: remove
             if (error) {
                 resetError()
             }

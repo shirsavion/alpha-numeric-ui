@@ -1,6 +1,6 @@
 import {apiRoutes} from './routes'
 import axios from 'axios'
-import postSongs from "./createPostSongs";
+import postSongs from './createPostSongs'
 
 const pollUpdates = (requestId) => {
     axios
@@ -12,7 +12,6 @@ const pollUpdates = (requestId) => {
                 if (response.data?.isReady) {
                     const song = response.data?.file64
                     audio = new Audio('data:audio/wav;base64,' + song)
-                    // snd.play()
                 }
                 return {status, audio}
             }
