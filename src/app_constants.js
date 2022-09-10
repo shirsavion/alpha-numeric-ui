@@ -24,7 +24,7 @@ export const PROMPT_BY_REQUEST_STATUS = {
     PRE: 'We got your request !',
     INIT: 'Fetching in progress ...',
     IN_PROGRESS: 'Song mixing in progress ...',
-    DONE: 'Mesh-Up is done !',
+    DONE: 'Mash-up is done!',
     ERROR: 'An error occured in the algorithm execution',
 }
 
