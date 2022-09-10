@@ -1,18 +1,19 @@
 import React, {useContext, useState} from 'react'
 import styled from 'styled-components'
-import PlayButton from './PlayArea/PlayButton'
-import PingButton from './PlayArea/PingButton'
-import {InputContext} from '../App'
-import {PROMPT_BY_REQUEST_STATUS} from '../app_constants'
-import {IMAGE_BY_STATUS} from '../utils/utils'
+import PlayButton from './PlayButton'
+import PingButton from '../PingButton'
+import {InputContext} from '../../../App'
+import {PROMPT_BY_REQUEST_STATUS} from '../../../constants/app_constants'
+import {IMAGE_BY_STATUS} from '../../../utils/utils'
 import axios from 'axios'
-import {apiRoutes} from '../Api/routes'
+import {apiRoutes} from '../../../Api/routes'
 
 const PlayArea = () => {
     const {trackingId, setRequestStatus, requestStatus} =
         useContext(InputContext)
 
     const [audioResult, setAudioResult] = useState(null)
+    const [isPlay, setIsPlay] = useState(false)
 
     const imageToShow = IMAGE_BY_STATUS[requestStatus]
     const requestHeader = apiRoutes.pollUpdates + trackingId
@@ -33,18 +34,22 @@ const PlayArea = () => {
         })
     }
 
-    const playResult = () => audioResult?.play()
+    const playResult = () => {
+        !isPlay ? audioResult?.play() : audioResult?.pause()
+        setIsPlay((prev) => !prev)
+    }
 
     return (
         <Container>
             <InnerContainer>
                 {!canPlay ? (
-                    <PingButton onclick={pollUpdates} />
+                    <PingButton onclick={pollUpdates}/>
                 ) : (
-                    <PlayButton onclick={playResult} />
+                    <PlayButton onclick={playResult}
+                                isPlay={isPlay}/>
                 )}
             </InnerContainer>
-            <StatusUpdate src={imageToShow} />
+            <StatusUpdate src={imageToShow}/>
         </Container>
     )
 }

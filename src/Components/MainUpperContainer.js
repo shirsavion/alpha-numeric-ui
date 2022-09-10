@@ -1,10 +1,10 @@
 import React from 'react'
 import styled from 'styled-components'
-import {ADVANCED_SETTINGS_TEXT} from '../app_constants'
-import InputSection from './InputSection'
-import SettingsArea from './SettingsArea'
-import SettingsButton from './SettingsButton'
-import PlayArea from './PlayArea'
+import {ADVANCED_SETTINGS_TEXT} from '../constants/app_constants'
+import InputSection from './InputArea/InputSection'
+import SettingsArea from './SettingsArea/SettingsArea'
+import SettingsButton from './SettingsArea/SettingsButton'
+import PlayArea from './PlayArea/Components/PlayArea'
 
 const MainUpperContainer = ({
     error,

@@ -1,5 +1,5 @@
 import React, {useContext} from 'react'
-import {InputContext} from '../App'
+import {InputContext} from '../../App'
 import styled from 'styled-components'
 import InputRow from './InputRow'
 

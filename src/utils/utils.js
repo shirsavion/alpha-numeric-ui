@@ -2,7 +2,7 @@ import DONE from '../assets/done.png'
 import FETCH from '../assets/fetch.png'
 import MIX from '../assets/mix.png'
 import ERROR from '../assets/error.png'
-import {PROMPT_BY_REQUEST_STATUS} from '../app_constants'
+import {PROMPT_BY_REQUEST_STATUS} from '../constants/app_constants'
 
 export const IMAGE_BY_STATUS = {
     [PROMPT_BY_REQUEST_STATUS.PRE]: FETCH,
@@ -14,11 +14,4 @@ export const IMAGE_BY_STATUS = {
 
 const YOUTUBE_LINK_URL_CORE = 'youtu'
 
-export const validateYoutubeLink = (url) => {
-    console.log('validating url: ', url)
-    if (!url || !url.includes(YOUTUBE_LINK_URL_CORE)) {
-        return false
-    }
-    console.log('added url: ', url)
-    return true
-}
+export const validateYoutubeLink = (url) => url && url.includes(YOUTUBE_LINK_URL_CORE)

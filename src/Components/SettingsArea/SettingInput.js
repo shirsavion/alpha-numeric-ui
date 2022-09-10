@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import Colors from '../Colors'
+import Colors from '../../constants/Colors'
 
 const SettingInput = ({setting, setSetting, label}) => {
     return (

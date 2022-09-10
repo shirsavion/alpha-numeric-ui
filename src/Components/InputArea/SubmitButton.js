@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import PLUS from '../assets/plus.png'
+import PLUS from '../../assets/plus.png'
 
 const SubmitButton = ({onclick}) => {
     return (

@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
-import Colors from '../Colors'
-import {YOUTUBE_LINK_PLACEHOLDER} from '../app_constants'
+import Colors from '../../constants/Colors'
+import {YOUTUBE_LINK_PLACEHOLDER} from '../../constants/app_constants'
 
 const LinkInput = ({link, setLink, submit, disabled, savedUrl}) => {
     return (

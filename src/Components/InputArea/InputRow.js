@@ -1,11 +1,11 @@
 import React, {useState} from 'react'
 import styled from 'styled-components'
-import {YOUTUBE_BASE_URL} from '../app_constants'
-import YOUTUBE_ICON from '../assets/youtube.png'
-import PLUS from '../assets/plus.png'
-import READY from '../assets/V.png'
+import {YOUTUBE_BASE_URL} from '../../constants/app_constants'
+import YOUTUBE_ICON from '../../assets/youtube.png'
+import PLUS from '../../assets/plus.png'
+import READY from '../../assets/V.png'
 import LinkInput from './LinkInput'
-import {validateYoutubeLink} from '../utils/utils'
+import {validateYoutubeLink} from '../../utils/utils'
 
 const InputRow = ({url, setUrl, resetError}) => {
     const [link, setLink] = useState('')

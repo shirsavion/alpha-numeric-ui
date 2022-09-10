@@ -5,11 +5,11 @@ import LOADING from '../assets/loading.png'
 
 const MainBottomContainer = ({
     onClick,
-    isready,
+    isReady,
     isShowSettings,
     audioPrepared,
 }) => {
-    if (isready) {
+    if (isReady) {
         return (
             <BottomContainer>
                 {!audioPrepared && <Loading src={LOADING} />}

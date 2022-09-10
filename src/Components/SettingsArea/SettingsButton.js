@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import Colors from '../Colors'
+import Colors from '../../constants/Colors'
 
 const SettingsButton = ({text, onClick}) => {
     return <AdvancedButton onClick={onClick}>{text}</AdvancedButton>

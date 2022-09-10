@@ -1,8 +1,8 @@
 import React, {useContext, useState} from 'react'
 import styled from 'styled-components'
-import Colors from '../Colors'
+import Colors from '../../constants/Colors'
 import SettingInput from './SettingInput'
-import {InputContext} from '../App'
+import {InputContext} from '../../App'
 import SettingsButton from './SettingsButton'
 import {
     DEFAULT_SETTINGS,
@@ -13,7 +13,7 @@ import {
     CROSSOVER,
     SELECTION,
     SAVE_SETTINGS,
-} from '../app_constants'
+} from '../../constants/app_constants'
 
 const SettingsArea = ({save}) => {
     const {setQueryOptions} = useContext(InputContext)

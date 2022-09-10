@@ -1,6 +1,6 @@
 import React, {createContext, useState} from 'react'
 import styled from 'styled-components'
-import Colors from './Colors'
+import Colors from './constants/Colors'
 import MainBottomContainer from './Components/MainBottomContainer'
 import MainUpperContainer from './Components/MainUpperContainer'
 import axios from 'axios'
@@ -12,7 +12,7 @@ import {
     ERROR_PROMPT,
     DESCRIPTION,
     PROMPT_BY_REQUEST_STATUS,
-} from './app_constants'
+} from './constants/app_constants'
 
 export const InputContext = createContext()
 
@@ -101,7 +101,7 @@ const App = () => {
                 <WaveForm src={WAVEFORM} move={move} ready={audioPrepared} />
                 <MainBottomContainer
                     onClick={go}
-                    isready={ready}
+                    isReady={ready}
                     audioPrepared={audioPrepared}
                     isShowSettings={showAdvancedSettings}
                 />
