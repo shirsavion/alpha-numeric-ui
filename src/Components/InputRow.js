@@ -26,7 +26,7 @@ const InputRow = ({url, setUrl, resetError}) => {
     if (!ready)
         return (
             <LinkRow>
-                <Link href={url ?? YOUTUBE_BASE_URL} target="_blank">
+                <Link href={YOUTUBE_BASE_URL} target="_blank">
                     <IconYT src={YOUTUBE_ICON}></IconYT>
                 </Link>
                 <LinkInput
@@ -42,7 +42,9 @@ const InputRow = ({url, setUrl, resetError}) => {
         )
     return (
         <LinkRow>
-            <IconYT src={YOUTUBE_ICON} />
+            <Link href={url ?? YOUTUBE_BASE_URL} target="_blank">
+                <IconYT src={YOUTUBE_ICON} />
+            </Link>
             <LinkInput link={link} disabled />
             {/* <UrlReady /> */}
             <SubmitButton>
