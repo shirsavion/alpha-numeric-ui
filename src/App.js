@@ -1,18 +1,13 @@
-import React from 'react'
+import React, {createContext, useState} from 'react'
 import LOGO from './assets/logo_medium.png'
 import WAVEFORM from './assets/waveform.png'
 import styled from 'styled-components'
-import {useState, createContext} from 'react'
 import Colors from './Colors'
-import postSongs from './Api/createPostSongs'
 import MainBottomContainer from './Components/MainBottomContainer'
 import MainUpperContainer from './Components/MainUpperContainer'
-import {
-    DEFAULT_SETTINGS,
-    ERROR_PROMPT,
-    PROMPT_BY_REQUEST_STATUS,
-    lorem,
-} from './app_constants'
+import {DEFAULT_SETTINGS, ERROR_PROMPT, lorem, PROMPT_BY_REQUEST_STATUS,} from './app_constants'
+import axios from "axios";
+import {apiRoutes} from "./Api/routes";
 
 export const InputContext = createContext()
 
@@ -25,7 +20,6 @@ const App = () => {
     const [queryOptions, setQueryOptions] = useState(DEFAULT_SETTINGS)
     const [showAdvancedSettings, setShowAdvancedSettings] = useState(false)
     const [trackingId, setTrackingId] = useState(null)
-
     const [requestStatus, setRequestStatus] = useState(
         PROMPT_BY_REQUEST_STATUS.PRE,
     )
@@ -34,16 +28,25 @@ const App = () => {
 
     const audioPrepared = requestStatus === PROMPT_BY_REQUEST_STATUS.DONE
 
+    const postSongs = () => {
+        axios
+            .post(apiRoutes.postSongs, {
+                urls: [firstUrl, secondUrl],
+                advanced: queryOptions,
+            })
+            .then((response) => {
+                console.log("got response from post", response.data)
+                const {id: requestId, msg: status} = response?.data
+                setTrackingId(requestId)
+            })
+    }
+    console.log("requestStatus && trackingId", requestStatus, trackingId)
+
     const go = () => {
         if (didInsertLinks) {
             setMove(true)
             setReady(true)
-            const request = postSongs([firstUrl, secondUrl], queryOptions)
-            if (request) {
-                const {requestId} = request
-                setTrackingId(requestId)
-                setRequestStatus(PROMPT_BY_REQUEST_STATUS.pre)
-            }
+            postSongs()
             if (error) {
                 resetError()
             }
