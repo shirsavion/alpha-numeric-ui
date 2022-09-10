@@ -1,13 +1,12 @@
 import React from 'react'
 import styled from 'styled-components'
 import PLAY from '../../../assets/play.png'
-// import PAUSE from '../../assets/pause.png' TODO: TBD
+import PAUSE from '../../../assets/pause.png'
 
-// TODO: change to PAUSE instead PLAY in condition
 const PlayButton = ({onclick, isPlay}) => {
     return (
         <Container onClick={onclick}>
-            <Icon src={isPlay ?  PLAY :  PLAY}/>
+            <Icon src={isPlay ? PAUSE : PLAY}/>
         </Container>
     )
 }
