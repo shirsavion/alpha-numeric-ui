@@ -4,6 +4,7 @@ import Colors from '../../constants/Colors'
 import SettingInput from './SettingInput'
 import {InputContext} from '../../App'
 import SettingsButton from './SettingsButton'
+import EXP_IMG from '../../assets/explain.png'
 import {
     DEFAULT_SETTINGS,
     SETTINGS_TITLE,
